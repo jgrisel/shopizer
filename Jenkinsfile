@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "-=- Checkout project -=-"
-                git url: 'https://github.com/jgrisel/Spring-Boot-Hello-World-Example.git'
+                git url: 'https://github.com/jgrisel/shopizer.git'
             }
         }
         
