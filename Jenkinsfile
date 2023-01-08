@@ -33,6 +33,24 @@ pipeline {
                     junit 'target/surefire-reports/*.xml'
                 }
             }
-        }     
+        } 
+        stage('Sonarqube Scanner') {
+            environment {
+                SCANNER_HOME = tool 'sonarqube'
+                ORGANIZATION = "EQL"
+                PROJECT_NAME = "Shopizer"
+            }
+            steps {
+                withSonarQubeEnv('sonarqube') {
+                    sh '''$SCANNER_HOME/bin/sonar-scanner \
+                    -Dsonar.java.sources=src \
+                    -Dsonar.java.binaries=target \
+                    -Dsonar.projectKey=$PROJECT_NAME \
+                    -Dsonar.language=java \
+                    -Dsonar.sourceEncoding=UTF-8'''
+                  }
+            }
+        }
+      
     }
 }
