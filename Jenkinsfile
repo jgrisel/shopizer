@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "-=- Checkout project -=-"
-                git url: 'https://github.com/jgrisel/shopizer.git, branch: "Master"'
+                git url: 'https://github.com/jgrisel/shopizer.git'
             }
         }
         
