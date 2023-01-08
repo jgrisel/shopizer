@@ -25,7 +25,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo "-=- Test project -=-"
-                sh 'mvn clean test -Dmaven.test.failure.ignore=true'
+                sh 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean test'
             }
             
    
