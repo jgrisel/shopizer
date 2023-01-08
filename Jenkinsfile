@@ -30,7 +30,7 @@ pipeline {
             
          post {
                 success {
-                    junit 'target/surefire-reports/*.xml'
+                    junit 'sm-core/target/surefire-reports/*.xml'
                 }
             } 
    
