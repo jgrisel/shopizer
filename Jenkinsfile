@@ -28,11 +28,7 @@ pipeline {
                 sh 'mvn clean test -Dmaven.test.failure.ignore=true'
             }
             
-            post {
-                success {
-                    junit 'target/surefire-reports/*.xml'
-                }
-            }
+   
         } 
         stage('Sonarqube Scanner') {
             environment {
