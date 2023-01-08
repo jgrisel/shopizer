@@ -18,7 +18,6 @@ pipeline {
             steps {
                 echo "-=- packaging project -=-"
                 sh 'mvn clean package -Dmaven.test.skip=true'
-'
             }
             
         }
