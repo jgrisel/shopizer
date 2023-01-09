@@ -36,19 +36,9 @@ pipeline {
    
         } 
         stage('Sonarqube Scanner') {
-            environment {
-                SCANNER_HOME = tool 'sonarqube'
-                ORGANIZATION = "EQL"
-                PROJECT_NAME = "Shopizer"
-            }
             steps {
-                withSonarQubeEnv('sonarqube') {
-                    sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.java.sources=**/src \
-                    -Dsonar.java.binaries=**/target \
-                    -Dsonar.projectKey=$PROJECT_NAME \
-                    -Dsonar.language=java \
-                    -Dsonar.sourceEncoding=UTF-8'''
+                echo "-=- Analyse Project -=-"
+                sh 'mvn clean verify sonar:sonar -Dsonar.projectKey=Shopizer -Dsonar.host.url=http://192.168.102.125:9000 -Dsonar.login=7a47331db205535b3f724ae8c8bc088e6a041a17'
                   }
             }
         }
