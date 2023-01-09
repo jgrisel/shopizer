@@ -33,8 +33,31 @@ pipeline {
                     junit 'sm-core/target/surefire-reports/*.xml'
                 }
             } 
-   
         } 
+        stage('Continuous deployment') {
+          steps {
+             script {
+              sshPublisher(
+               continueOnError: false, failOnError: true,
+               publishers: [
+                sshPublisherDesc(
+                 configName: "Shopizer",
+                 verbose: true,
+                 transfers: [
+                  sshTransfer(
+                   sourceFiles: "sm-shop/target/*.jar",
+                   removePrefix: "/target",
+                   remoteDirectory: "",
+                   execCommand: """
+                    sudo mv ROOT.jar /home/shopizer/shopizer/sm-shop/target;
+                    cd shopizer/sm-shop
+                    mvn spring-boot:run
+                  )
+                 ])
+               ])
+             }
+          }
+        }
         stage('Sonarqube Scanner') {
             steps {
                 echo "-=- Analyse Project -=-"
