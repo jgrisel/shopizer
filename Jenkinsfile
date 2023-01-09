@@ -34,7 +34,8 @@ pipeline {
                 }
             } 
         } 
-        stage('Continuous deployment') {
+        
+       stage('Continuous deployment') {
           steps {
              script {
               sshPublisher(
@@ -50,14 +51,15 @@ pipeline {
                    remoteDirectory: "",
                    execCommand: """
                     sudo mv ROOT.jar /home/shopizer/shopizer/sm-shop/target;
-                    cd shopizer/sm-shop
-                    mvn spring-boot:run
+                    cd shopizer/sm-shop;
+                    mvn spring-boot:run; """
                   )
                  ])
                ])
              }
           }
         }
+        
         stage('Sonarqube Scanner') {
             steps {
                 echo "-=- Analyse Project -=-"
