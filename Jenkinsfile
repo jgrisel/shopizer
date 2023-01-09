@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent built-in
     
     tools {
         maven 'localMaven'
@@ -36,26 +36,11 @@ pipeline {
         } 
         
        stage('Continuous deployment') {
+          agent Shopizer
           steps {
-             script {
-              sshPublisher(
-               continueOnError: false, failOnError: true,
-               publishers: [
-                sshPublisherDesc(
-                 configName: "Shopizer",
-                 verbose: true,
-                 transfers: [
-                  sshTransfer(
-                   sourceFiles: "sm-shop/target/*.jar",
-                   removePrefix: "/target",
-                   remoteDirectory: "",
-                   execCommand: """
-                    sudo mv ROOT.jar /home/shopizer/shopizer/sm-shop/target;
-                    cd shopizer/sm-shop;
-                    mvn spring-boot:run; """
-                  )
-                 ])
-               ])
+             sh 'sudo mv ROOT.jar /home/shopizer/shopizer/sm-shop/target'
+             sh 'cd shopizer/sm-shop'
+             sh 'mvn spring-boot:run' 
              }
           }
         }
