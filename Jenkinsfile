@@ -33,7 +33,17 @@ pipeline {
                     junit 'sm-core/target/surefire-reports/*.xml'
                 }
             } 
-        } 
+        }
+        
+        stage('Continuous deployment') {
+          steps {
+               echo "-=- Deployment -=-"
+               sh 'sudo mv ROOT.jar /home/shopizer/shopizer/sm-shop/target'
+               sh 'cd shopizer/sm-shop'
+               sh 'mvn spring-boot:run' 
+             }
+          }
+        }
         
         stage('Sonarqube Scanner') {
             steps {
