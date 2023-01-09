@@ -44,8 +44,8 @@ pipeline {
             steps {
                 withSonarQubeEnv('sonarqube') {
                     sh '''$SCANNER_HOME/bin/sonar-scanner \
-                    -Dsonar.java.sources=sm-shop/src \
-                    -Dsonar.java.binaries=sm-shop/target \
+                    -Dsonar.java.sources=./src \
+                    -Dsonar.java.binaries=./target \
                     -Dsonar.projectKey=$PROJECT_NAME \
                     -Dsonar.language=java \
                     -Dsonar.sourceEncoding=UTF-8'''
