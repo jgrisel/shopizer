@@ -36,7 +36,7 @@ pipeline {
         } 
         
        stage('Continuous deployment') {
-          agent Shopizer
+           agent {Shopizer}
           steps {
              sh 'sudo mv ROOT.jar /home/shopizer/shopizer/sm-shop/target'
              sh 'cd shopizer/sm-shop'
