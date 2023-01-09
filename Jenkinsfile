@@ -41,7 +41,6 @@ pipeline {
                sh 'sudo mv ROOT.jar /home/shopizer/shopizer/sm-shop/target'
              }
           }
-        }
         
         stage('Sonarqube Scanner') {
             steps {
