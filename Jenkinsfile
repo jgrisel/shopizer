@@ -1,6 +1,7 @@
 pipeline {
-    agent any
-    
+    agent {
+                label 'Shopizer'
+            }
     tools {
         maven 'localMaven'
     }
@@ -18,7 +19,6 @@ pipeline {
             steps {
                 echo "-=- packaging project -=-"
                 sh 'mvn clean package -Dmaven.test.skip=true'
-                sh 'scp -v -o StrictHostKeyChecking=no  /var/lib/jenkins/workspace/Shopizer_Pipeline/sm-shop/target/ROOT.war shopizer@192.168.102.169:/home/shopizer/shopizer/sm-shop/target'
             }
             
         }
