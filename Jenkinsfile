@@ -11,6 +11,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "-=- Checkout project -=-"
+                sh 'cd'
                 git url: 'https://github.com/jgrisel/shopizer.git'
             }
         }
