@@ -25,8 +25,11 @@ pipeline {
             
         }
 
-        stage('Test') {
-            parallel {
+        stage('Run Test parallel') {
+            
+        parallel {
+            
+        stage('Test') {    
             agent {
                 label 'Shopizer'
             }
