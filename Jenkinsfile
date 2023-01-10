@@ -41,7 +41,7 @@ pipeline {
           steps {
                echo "-=- Deployment -=-"
                sh 'cd sm-shop'
-               sh 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn spring-boot:run' 
+               sh 'sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn spring-boot:run' 
              }
           }
         
