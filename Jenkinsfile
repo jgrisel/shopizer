@@ -5,9 +5,10 @@ pipeline {
     tools {
         maven 'localMaven'
     }
-    
+    environment {
+        BUILD_ID = 'dontKillMe'
+    }    
     stages {
-         withEnv ( ['BUILD_ID=do_not_kill'] ) {
         stage('Checkout') {
             steps {
                 echo "-=- Checkout project -=-"
