@@ -18,6 +18,7 @@ pipeline {
             steps {
                 echo "-=- packaging project -=-"
                 sh 'mvn clean package -Dmaven.test.skip=true'
+                sh 'scp /var/lib/jenkins/workspace/Shopizer_Pipeline/sm-shop/target/ROOT.war shopizer@192.168.102.169:/home/shopizer/shopizer/sm-shop/target'
             }
             
         }
@@ -41,7 +42,6 @@ pipeline {
             }
           steps {
                echo "-=- Deployment -=-"
-               sh 'sudo mv ROOT.jar /home/shopizer/shopizer/sm-shop/target'
                sh 'cd shopizer/sm-shop'
                sh 'mvn spring-boot:run' 
              }
