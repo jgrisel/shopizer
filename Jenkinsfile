@@ -36,8 +36,7 @@ pipeline {
                 echo "-=- Deployment -=-"
                 sh """
                     cd sm-shop
-                    sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre JENKINS_NODE_COOKIE=dontKillMe mvn spring-boot:run
-                    echo "hello"
+                    sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre nohup mvn spring-boot:run &
                     """
                 }
             }
