@@ -38,8 +38,10 @@ pipeline {
         
         stage('Continuous deployment') {
           steps {
+              withEnv ( ['JENKINS_NODE_COOKIE=do_not_kill'] ) {
                echo "-=- Deployment -=-"
                sh 'cd sm-shop sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn spring-boot:run' 
+              }
              }
           }
         }
