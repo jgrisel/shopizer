@@ -42,12 +42,5 @@ pipeline {
                sh 'cd sm-shop sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn spring-boot:run' 
              }
           }
-        
-        stage('Sonarqube Scanner') {
-            steps {
-                echo "-=- Analyse Project -=-"
-                sh 'sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean verify sonar:sonar -Dsonar.projectKey=Shopizer -Dsonar.host.url=http://192.168.102.125:9000 -Dsonar.login=7a47331db205535b3f724ae8c8bc088e6a041a17'
-                  }
-            }
         }
 }
