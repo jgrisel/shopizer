@@ -81,8 +81,9 @@ pipeline {
             reportFiles: 'surefire-report.html',
             reportName: 'Automation Tests Report'
           ]
-            }
-        }
-      }
+                }
+             }
+         }
+     }
    }
 }
