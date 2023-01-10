@@ -11,7 +11,6 @@ pipeline {
         stage('Checkout') {
             steps {
                 echo "-=- Checkout project -=-"
-                sh 'cd'
                 git url: 'https://github.com/jgrisel/shopizer.git'
             }
         }
@@ -40,8 +39,7 @@ pipeline {
         stage('Continuous deployment') {
           steps {
                echo "-=- Deployment -=-"
-               sh 'cd sm-shop'
-               sh 'sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn spring-boot:run' 
+               sh 'cd sm-shop sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn spring-boot:run' 
              }
           }
         
