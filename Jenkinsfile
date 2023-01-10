@@ -37,9 +37,6 @@ pipeline {
         }
         
         stage('Continuous deployment') {
-            agent {
-                label 'Shopizer'
-            }
           steps {
                echo "-=- Deployment -=-"
                sh 'cd shopizer/sm-shop'
