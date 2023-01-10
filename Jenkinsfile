@@ -40,7 +40,19 @@ pipeline {
           steps {
               withEnv ( ['JENKINS_NODE_COOKIE=do_not_kill'] ) {
                echo "-=- Deployment -=-"
-               sh 'cd sm-shop sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn spring-boot:run' 
+               sh 'cd sm-shop sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn spring-boot:run'
+               echo "-=- Checkout project automation -=-"
+               git url: 'https://github.com/fatimaAmeza/shopiserTest.git'
+               sh 'chmod +x driver/chromedriver.exe'
+               sh 'mvn clean verify surefire-report:report-only'
+                  publishHTML target: [
+            allowMissing: false,
+            alwaysLinkToLastBuild: false,
+            keepAll: true,
+            reportDir: 'target/site',
+            reportFiles: 'surefire-report.html',
+            reportName: 'Automation Tests Report'
+          ]                 
               }
              }
           }
