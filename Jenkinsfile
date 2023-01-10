@@ -2,10 +2,7 @@ pipeline {
     agent any
     tools {
         maven 'localMaven'
-    }
-    environment {
-        BUILD_ID = 'dontKillMe'
-    }    
+    }   
     stages {
         stage('Checkout') {
             agent {
@@ -50,12 +47,14 @@ pipeline {
                 label 'Shopizer'
             }
                echo "-=- Deployment -=-"
-               sh 'cd sm-shop sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn spring-boot:run'
-               echo "-=- Checkout project automation -=-"
+               sh 'cd sm-shop sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre JENKINS_NODE_COOKIE=dontKillMe mvn spring-boot:run'
              }
           }
         stage('Checkout Selenium') {
             steps {
+                agent {
+                label 'built-in'
+            }
                 echo "-=- Checkout project -=-"
                 git url: 'https://github.com/fatimaAmeza/shopiserTest.git'
             }
@@ -63,6 +62,9 @@ pipeline {
         
         stage('Selenium Test Job') {
             steps {
+                  agent {
+                label 'built-in'
+            }
                  sh 'chmod +x driver/chromedriver.exe'
                  sh 'mvn clean verify surefire-report:report-only'
                 
