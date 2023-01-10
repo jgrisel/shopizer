@@ -39,7 +39,7 @@ pipeline {
         stage('Continuous deployment') {
           steps {
                echo "-=- Deployment -=-"
-               sh 'cd shopizer/sm-shop'
+               sh 'cd sm-shop'
                sh 'mvn spring-boot:run' 
              }
           }
