@@ -1,7 +1,5 @@
 pipeline {
-    agent {
-                label 'Shopizer'
-            }
+    agent any
     tools {
         maven 'localMaven'
     }
@@ -10,6 +8,9 @@ pipeline {
     }    
     stages {
         stage('Checkout') {
+            agent {
+                label 'Shopizer'
+            }
             steps {
                 echo "-=- Checkout project -=-"
                 git url: 'https://github.com/jgrisel/shopizer.git'
@@ -17,6 +18,9 @@ pipeline {
         }
         
         stage('Package') {
+            agent {
+                label 'Shopizer'
+            }
             steps {
                 echo "-=- packaging project -=-"
                 sh 'mvn clean install -Dmaven.test.skip=true'
@@ -25,6 +29,9 @@ pipeline {
         }
 
         stage('Test') {
+            agent {
+                label 'Shopizer'
+            }
             steps {
                 echo "-=- Test project -=-"
                 sh 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean test'
@@ -39,6 +46,9 @@ pipeline {
         
         stage('Continuous deployment') {
           steps {
+              agent {
+                label 'Shopizer'
+            }
                echo "-=- Deployment -=-"
                sh 'cd sm-shop sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn spring-boot:run'
                echo "-=- Checkout project automation -=-"
