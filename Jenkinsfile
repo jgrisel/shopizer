@@ -41,7 +41,6 @@ pipeline {
                     """
                 }
             }
-        }
         stage('Continuous deployment') {
           steps {
               agent {
@@ -86,4 +85,3 @@ pipeline {
         }
       }
    }
-}
