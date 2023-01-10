@@ -6,10 +6,8 @@ pipeline {
         maven 'localMaven'
     }
     
-    withEnv ( ['JENKINS_NODE_COOKIE=do_not_kill'] ) {
-    
     stages {
-        
+         withEnv ( ['JENKINS_NODE_COOKIE=do_not_kill'] ) {
         stage('Checkout') {
             steps {
                 echo "-=- Checkout project -=-"
