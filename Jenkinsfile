@@ -43,7 +43,12 @@ pipeline {
                 label 'Shopizer'
             }
                echo "-=- Deployment -=-"
-               sh 'cd sm-shop sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre JENKINS_NODE_COOKIE=dontKillMe mvn spring-boot:run'
+              sh """
+              cd sm-shop
+              JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+              JENKINS_NODE_COOKIE=dontKillMe
+              sudo mvn spring-boot:run
+              """
              }
           }
         stage('Checkout Selenium') {
