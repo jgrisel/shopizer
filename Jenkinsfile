@@ -84,6 +84,19 @@ pipeline {
                   }
             }
             
+        stage('Continuous delivery') {
+          steps {
+              agent {
+                label 'Shopizer'
+            }
+            sh """
+                    sudo mv ROOT.war /home/vagrant/project
+                    cd project
+                    sudo docker build -t springbootapp1 . 
+                    docker tag springbootapp1 jgrisel/springbootapp1:1.0
+                    docker push jgrisel/springbootapp1:1.0
+                    """ 
+            
         }
        
     }
