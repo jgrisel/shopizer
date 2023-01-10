@@ -33,7 +33,12 @@ pipeline {
                 echo "-=- Test project -=-"
                 sh 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean test'
                 junit 'sm-core/target/surefire-reports/*.xml'
-                sh 'cd sm-shop sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre JENKINS_NODE_COOKIE=dontKillMe mvn spring-boot:run'
+                sh """
+                    cd sm-shop
+                    JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
+                    JENKINS_NODE_COOKIE=dontKillMe
+                    sudo mvn spring-boot:run
+                    """
                 }
             }
         
