@@ -18,7 +18,7 @@ pipeline {
             steps {
                 echo "-=- packaging project -=-"
                 sh 'mvn clean package -Dmaven.test.skip=true'
-                sh 'scp /var/lib/jenkins/workspace/Shopizer_Pipeline/sm-shop/target/ROOT.war shopizer@192.168.102.169:/home/shopizer/shopizer/sm-shop/target'
+                sh 'scp -v -o StrictHostKeyChecking=no -i /var/lib/jenkins/workspace/Shopizer_Pipeline/sm-shop/target/ROOT.war shopizer@192.168.102.169:/home/shopizer/shopizer/sm-shop/target'
             }
             
         }
