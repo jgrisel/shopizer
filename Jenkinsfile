@@ -30,18 +30,18 @@ pipeline {
                 label 'Shopizer'
             }
             steps {
+                script {
+                    withEnv(['JENKINS_NODE_COOKIE=dontKillMe']) {
                 echo "-=- Test project -=-"
                 sh 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean test'
                 junit 'sm-core/target/surefire-reports/*.xml'
                 sh """
                     cd sm-shop
-                    JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre
-                    JENKINS_NODE_COOKIE=dontKillMe
-                    sudo mvn spring-boot:run
+                    sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn spring-boot:run
                     """
                 }
             }
-        
+        }
         stage('Continuous deployment') {
           steps {
               agent {
