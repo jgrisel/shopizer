@@ -35,7 +35,6 @@ pipeline {
                 junit 'sm-core/target/surefire-reports/*.xml'
                 }
             }
-        }
         
         stage('Continuous deployment') {
           steps {
