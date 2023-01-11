@@ -43,6 +43,7 @@ pipeline {
             }
             steps {
                 echo "-=- Déploiement -=-"
+                sh 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean test'
             }
         }
         
@@ -69,6 +70,7 @@ pipeline {
             }
             steps {
                 echo "-=- Livraison -=-"
+                sh 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean test'
             }
         }
         
