@@ -92,9 +92,9 @@ pipeline {
             sh """
                     sudo mv ROOT.war /home/shopizer/project
                     cd project
-                    sudo docker build -t springbootapp1 . 
-                    docker tag springbootapp1 jgrisel/springbootapp1:1.0
-                    docker push jgrisel/springbootapp1:1.0
+                    sudo docker build -t shopizer . 
+                    docker tag springbootapp1 jgrisel/shopizer1:1.0
+                    docker push jgrisel/shopizer1:1.0
                     """ 
             
         }
