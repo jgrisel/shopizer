@@ -86,7 +86,9 @@ pipeline {
                 label 'Shopizer'
             }
             sh """
-                    sudo mv ROOT.war /home/shopizer/project
+                    cd /workspace/Shopizer/sm-shop/target
+                    sudo cp ROOT.war ~/project
+                    cd
                     cd project
                     sudo docker build -t shopizer . 
                     docker tag springbootapp1 jgrisel/shopizer1:1.0
