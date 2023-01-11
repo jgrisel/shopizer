@@ -24,10 +24,6 @@ pipeline {
             }
             
         }
-
-        stage('Run Test parallel') {
-            
-        parallel {
             
         stage('Test') {    
             agent {
@@ -101,6 +97,4 @@ pipeline {
        
     }
   }
-}
-    }
 }
