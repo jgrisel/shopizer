@@ -91,8 +91,8 @@ pipeline {
                     cd
                     cd project
                     sudo docker build -t shopizer . 
-                    docker tag springbootapp1 jgrisel/shopizer1:1.0
-                    docker push jgrisel/shopizer1:1.0
+                    sudo docker tag shopizer jgrisel/shopizer1:1.0
+                    sudo docker push jgrisel/shopizer1:1.0
                     """ 
             
         }
