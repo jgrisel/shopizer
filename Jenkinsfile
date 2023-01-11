@@ -37,8 +37,6 @@ pipeline {
                 }
             }
   
- 
-      stages {
         stage('Checkout Selenium') {
                 agent {
                 label 'Windows'
@@ -77,4 +75,4 @@ pipeline {
             }
   }
 }
-}
+
