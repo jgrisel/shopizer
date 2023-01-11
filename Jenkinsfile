@@ -80,7 +80,7 @@ pipeline {
                 label 'Shopizer'
             }
                 echo "-=- Analyse Project -=-"
-                sh 'sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean verify sonar:sonar -Dsonar.projectKey=Shopizer -Dsonar.host.url=http://192.168.102.181:9000 -Dsonar.login=445562f9d9543ceef67739b2cb1cb0f57fa77399'
+                sh 'sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean verify sonar:sonar -Dsonar.projectKey=shopizer -Dsonar.host.url=http://192.168.102.181:9000 -Dsonar.login=d6500b8b1dfdb5511016df4b0238824d3ca0d05c'
                   }
             }
             
