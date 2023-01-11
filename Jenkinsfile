@@ -37,33 +37,12 @@ pipeline {
                 }
             }
         
-        stage('Checkout Selenium') {
-                agent {
-                label 'Windows'
-            }
+      stage('Selenium Test Job') {
             steps {
-                echo "-=- Checkout project -=-"
-                git url: 'https://github.com/fatimaAmeza/shopiserTest.git'
+                 build job: 'test2' 
             }
         }
-        
-        stage('Selenium Test Job') {
-               agent {
-                label 'Windows'
-            }
-            steps {
-                 bat 'mvn clean verify surefire-report:report-only'
-                
-                publishHTML target: [
-            allowMissing: false,
-            alwaysLinkToLastBuild: false,
-            keepAll: true,
-            reportDir: 'target/site',
-            reportFiles: 'surefire-report.html',
-            reportName: 'Automation Tests Report'
-          ]
-                }
-             }
+
   
         stage('Sonarqube Scanner') {
                         agent {
