@@ -38,7 +38,11 @@ pipeline {
             }
         
         stage('Déploiement') {
+                        agent {
+                label 'built-in'
+            }
             steps {
+                echo "-=- Déploiement -=-"
             }
         }
         
@@ -60,7 +64,11 @@ pipeline {
             }
         
         stage('Livraison') {
+                        agent {
+                label 'built-in'
+            }
             steps {
+                echo "-=- Livraison -=-"
             }
         }
         
