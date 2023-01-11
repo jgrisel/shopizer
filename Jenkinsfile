@@ -15,7 +15,7 @@ pipeline {
             }
         }
         
-        stage('Package') {
+        stage('Package application') {
                         agent {
                 label 'built-in'
             }
@@ -26,7 +26,7 @@ pipeline {
             
         }
             
-        stage('Test') { 
+        stage('Test Unitaire') { 
                         agent {
                 label 'built-in'
             }
@@ -36,6 +36,11 @@ pipeline {
                 junit 'sm-core/target/surefire-reports/*.xml'
                 }
             }
+        
+        stage('Déploiement') {
+            steps {
+            }
+        }
         
       stage('Selenium Test Job') {
             steps {
@@ -53,6 +58,12 @@ pipeline {
                 sh 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean verify sonar:sonar -Dsonar.projectKey=shopizer -Dsonar.host.url=http://192.168.102.181:9000 -Dsonar.login=d6500b8b1dfdb5511016df4b0238824d3ca0d05c'
                   }
             }
+        
+        stage('Livraison') {
+            steps {
+            }
+        }
+        
   }
 }
 
