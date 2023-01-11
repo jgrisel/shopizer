@@ -5,9 +5,6 @@ pipeline {
     }   
     stages {
         stage('Checkout') {
-            agent {
-                label 'Shopizer'
-            }
             steps {
                 echo "-=- Checkout project -=-"
                 git url: 'https://github.com/jgrisel/shopizer.git'
@@ -15,9 +12,6 @@ pipeline {
         }
         
         stage('Package') {
-            agent {
-                label 'Shopizer'
-            }
             steps {
                 echo "-=- packaging project -=-"
                 sh 'mvn clean install -Dmaven.test.skip=true'
@@ -26,9 +20,6 @@ pipeline {
         }
             
         stage('Test') {    
-            agent {
-                label 'Shopizer'
-            }
             steps {
                 echo "-=- Test project -=-"
                 sh 'JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean test'
@@ -39,9 +30,6 @@ pipeline {
  
         stage('Checkout Selenium') {
             steps {
-                agent {
-                label 'built-in'
-            }
                 echo "-=- Checkout project -=-"
                 git url: 'https://github.com/fatimaAmeza/shopiserTest.git'
             }
@@ -49,9 +37,6 @@ pipeline {
         
         stage('Selenium Test Job') {
             steps {
-                  agent {
-                label 'built-in'
-            }
                  sh 'chmod +x driver/chromedriver.exe'
                  sh 'mvn clean verify surefire-report:report-only'
                 
@@ -67,29 +52,9 @@ pipeline {
              }
         stage('Sonarqube Scanner') {
             steps {
-                agent {
-                label 'Shopizer'
-            }
                 echo "-=- Analyse Project -=-"
                 sh 'sudo JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64/jre mvn clean verify sonar:sonar -Dsonar.projectKey=shopizer -Dsonar.host.url=http://192.168.102.181:9000 -Dsonar.login=d6500b8b1dfdb5511016df4b0238824d3ca0d05c'
                   }
             }
-            
-        stage('Continuous delivery') {
-          steps {
-              agent {
-                label 'Shopizer'
-            }
-            sh """
-                    sudo mv ROOT.war /home/shopizer/project
-                    cd project
-                    sudo docker build -t shopizer . 
-                    docker tag springbootapp1 jgrisel/shopizer1:1.0
-                    docker push jgrisel/shopizer1:1.0
-                    """ 
-            
-        }
-       
-    }
   }
 }
